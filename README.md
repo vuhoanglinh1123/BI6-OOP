@@ -11,13 +11,13 @@ Students are expected to:
 Member list
 =====================================
 
-+Group 1:
-+1. Vũ Hoàng Linh
-+2. Hà Anh Tuấn
-+3. Phạm Duy Minh
-+4. Hoàng Hải
+Group 1:
+* Vũ Hoàng Linh
+* Hà Anh Tuấn
+* Phạm Duy Minh
+* Hoàng Hải
 
 Project description
 =====================================
 
-*Add your project description here*
+Objective: Develop a "Sudoku Game" in Java with GUI
