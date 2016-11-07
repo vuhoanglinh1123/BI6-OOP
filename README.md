@@ -11,7 +11,11 @@ Students are expected to:
 Member list
 =====================================
 
-*Add student list of your group here*
++Group 1:
++1. Vũ Hoàng Linh
++2. Hà Anh Tuấn
++3. Phạm Duy Minh
++4. Hoàng Hải
 
 Project description
 =====================================
