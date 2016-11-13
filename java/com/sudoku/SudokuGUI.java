@@ -7,22 +7,22 @@ package com.sudoku;
 import javax.swing.*;
 import java.awt.*;
 
-public class SudokuGUI extends JFrame implements Board{
-    private JFrame mainFrame;
+public class SudokuGUI implements Board{
+    static JFrame mainFrame;
     private JPanel mainPanel;
     public static JPanel buttonPanel;
     private JPanel[] grid;
     private static JTextField[][] cell;
     private Color PANEL_COLOR = Color.white;
     private Color CELL_COLOR = new Color(51, 51, 51);
-    private Color TEXT_COLOR_1 = new Color(255, 255, 56);
-    private Color TEXT_COLOR_2 = new Color(100,51,255);
+    private static Color TEXT_COLOR_1 = new Color(255, 255, 56);
+    private static Color TEXT_COLOR_2 = new Color(100,51,255);
     private Font TEXT_FONT = new Font("Cursive", Font.BOLD, 35);
     private GridLayout PANEL_LAYOUT = new GridLayout(3, 3, 5, 5);
     private FlowLayout BUTTON_LAYOUT = new FlowLayout(FlowLayout.CENTER,60,15);
 
     public SudokuGUI() {
-        mainFrame = new JFrame("Sudoku Algorithm Demo - Group 1");
+        mainFrame = new JFrame("Sudoku Solver - Group 1");
         mainFrame.setLayout(new BorderLayout());
 
         //Panel for the Sudoku map Display
@@ -46,7 +46,6 @@ public class SudokuGUI extends JFrame implements Board{
             for (int row = aux; row < (aux + 3); row++) {
                 for (int col = 0; col < 9; col++) {
                     cell[row][col] = new JTextField();
-                    cell[row][col].setEditable(false);
                     if (col < 3) {
                         grid[aux].add(cell[row][col]);
                     } else if (col < 6) {
@@ -54,11 +53,7 @@ public class SudokuGUI extends JFrame implements Board{
                     } else {
                         grid[aux + 2].add(cell[row][col]);
                     }
-                    if(fixed[row][col]){
-                        cell[row][col].setForeground(TEXT_COLOR_2);
-                    } else {
-                        cell[row][col].setForeground(TEXT_COLOR_1);
-                    }
+                    cell[row][col].setEditable(false);
                     cell[row][col].setBackground(CELL_COLOR);
                     cell[row][col].setHorizontalAlignment(JTextField.CENTER);
                     cell[row][col].setFont(TEXT_FONT);
@@ -67,13 +62,14 @@ public class SudokuGUI extends JFrame implements Board{
         }
 
         //add everything to the main Window
-        mainFrame.add(new JLabel(" "), BorderLayout.NORTH);
-        mainFrame.add(new JLabel("     "), BorderLayout.EAST);
-        mainFrame.add(new JLabel("     "), BorderLayout.WEST);
-        mainFrame.add(mainPanel, BorderLayout.CENTER);
-        mainFrame.add(buttonPanel, BorderLayout.SOUTH);
+        mainFrame.add(new JLabel(" "),BorderLayout.NORTH);
+        mainFrame.add(new JLabel("     "),BorderLayout.WEST);
+        mainFrame.add(new JLabel("     "),BorderLayout.EAST);
+        mainFrame.add(mainPanel,BorderLayout.CENTER);
+        mainFrame.add(buttonPanel,BorderLayout.SOUTH);
 
         mainFrame.pack();
+        mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
     }
@@ -83,7 +79,16 @@ public class SudokuGUI extends JFrame implements Board{
         buttonPanel.revalidate();
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                cell[row][col].setText(demo[row][col] + ""); //demo[][] from Board.java
+                if(matrix[row][col] == 0)
+                    cell[row][col].setText("");
+                else
+                    cell[row][col].setText(matrix[row][col] + "");
+
+                if(editable[row][col]){
+                    cell[row][col].setForeground(TEXT_COLOR_1);
+                } else {
+                    cell[row][col].setForeground(TEXT_COLOR_2);
+                }
             }
         }
     }
